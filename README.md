@@ -28,7 +28,8 @@ Snakemake work flows ("snakefiles") are python code (all the python syntax rules
 ### `input` section
 
 - Inputs are one or more file names, in quotes, comma-separated
-- Inputs are optional • Inputs can have “symbolic” names
+- Inputs are optional 
+- Inputs can have “symbolic” names
 
 ```
 rule align:
