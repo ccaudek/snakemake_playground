@@ -43,7 +43,7 @@ rule align:
 - Same as inputs: can have ”symbolic names”
 - Outputs are optional - common in top-level rule that simply checks if inputs are present.
 
-### shell directive
+### `shell` directive
 
 The shell directive is followed by a Python string containing the shell command to execute.
 
