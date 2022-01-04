@@ -33,15 +33,22 @@ Snakemake work flows ("snakefiles") are python code (all the python syntax rules
 
 ```
 rule align:
-    input: index=“hg19”, data=“sample1.fastq”     output: ”sample1.sam”     shell: “bwa mem {input.index} {input.data} –o {output}”
-    message: “Rule {rule} aligning input file {input.data}”
+    input:
+      index=“hg19”, data=“sample1.fastq” 
+    output:
+      ”sample1.sam” 
+    shell:
+      “bwa mem {input.index} {input.data} –o {output}”
+    message:
+      “Rule {rule} aligning input file {input.data}”
 ```
 
 ### `output` section
 
 - Same as inputs: one or more file names, in quotes, comma-separated
 - Same as inputs: can have ”symbolic names”
-- Outputs are optional - common in top-level rule that simply checks if inputs are present.
+- Outputs are optional
+- common in top-level rule that simply checks if inputs are present.
 
 ### `shell` directive
 
@@ -73,7 +80,8 @@ rule usercount:
     input: "userfile.txt"
     output: "users.count"
     run:
-        users=set()         with open(input[0]) as infile:
+        users=set() 
+        with open(input[0]) as infile:
             ...
 ```
 
