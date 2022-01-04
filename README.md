@@ -26,7 +26,7 @@ Install with Mamba. Instructions in the [link](https://snakemake.readthedocs.io/
 
 Snakemake work flows ("snakefiles") are python code (all the python syntax rules apply).
 
-### input section
+### `input` section
 
 - Inputs are one or more file names, in quotes, comma-separated
 - Inputs are optional • Inputs can have “symbolic” names
@@ -37,7 +37,7 @@ rule align:
     message: “Rule {rule} aligning input file {input.data}”
 ```
 
-### output section
+### `output` section
 
 - Same as inputs: one or more file names, in quotes, comma-separated
 - Same as inputs: can have ”symbolic names”
@@ -62,7 +62,7 @@ rule link:
                 """
 ```
 
-### run directive
+### `run` directive
 
 - Instead of bash, the action can be written in python
 - Put this in the “run:” section of the rule
@@ -77,7 +77,7 @@ rule usercount:
             ...
 ```
 
-### script directive
+### `script` directive
 
 A rule can also point to an external script instead of a shell command or inline Python code. For this purpose, Snakemake offers the script directive. This mechanism also allows you to integrate R and R Markdown scripts with Snakemake, e.g.
 
@@ -117,6 +117,8 @@ do_something(
 To debug R scripts, you can save the workspace with save.image(), and invoke R after Snakemake has terminated. Then you can use the usual R debugging facilities while having access to the snakemake variable.
 
 It is best practice to wrap the actual code into a separate function. This increases the portability if the code shall be invoked outside of Snakemake or from a different rule. A convenience method, snakemake@source(), acts as a wrapper for the normal R source() function, and can be used to source files relative to the original script directory.
+
+### R Markdown
 
 An R Markdown file can be integrated in the same way as R and Python scripts, but only a single output (html) file can be used:
 
