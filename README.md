@@ -1,7 +1,6 @@
 # LEARN SNAKEMAKE
 
-* Contributors:
-    - CORRADO CAUDEK (@ccaudek) [cre, aut]
+For the most part, the text used in this README is taken from the official Snakemake documentation.
 
 ## snakemake
 
