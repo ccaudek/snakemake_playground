@@ -1,18 +1,32 @@
-# LEARN SNAKEMAKE
+# Snakemake workflow: {{snakemake_playground_project}}
 
-For the most part, the text used in this README is taken from the official Snakemake documentation.
+[![Snakemake](https://img.shields.io/badge/snakemake-≥{{cookiecutter.min_snakemake_version}}-brightgreen.svg)](https://snakemake.bitbucket.io)
+[![Build Status](https://travis-ci.org/snakemake-workflows/{{cookiecutter.repo_name}}.svg?branch=master)](https://travis-ci.org/snakemake-workflows/{{cookiecutter.repo_name}})
 
-## snakemake
+This is a simple example of a Snakemake workflow using R.
 
-A Snakemake workflow is defined by specifying rules in a Snakefile. Rules decompose the workflow into small steps (for example, the application of a single tool) by specifying how to create sets of output files from sets of input files. Snakemake automatically determines the dependencies between the rules by matching file names.
+Insert your code into the respective folders, i.e. `scripts`, `rules`, and `envs`. Define the entry point of the workflow in the `Snakefile` and the main configuration in the `config.yaml` file.
 
-## Install
+## Authors
 
-Install with Mamba. Instructions in the [link](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
+* {{Corrado Caudek}} (@{{ccaudek}})
+
+## Notes
+
+This README contains the notes that I found useful while studying Snakemake. The text has been copied from various sources, especially from the official Snakemake documentation.
+
+## Introduction
+
+A Snakemake workflow is defined by specifying rules in a Snakefile. Rules decompose the workflow into small steps (for example, the application of a single tool) by specifying how to create sets of output files from sets of input files. Snakemake automatically determines the dependencies between the rules by matching file names. The workflow is determined automatically from top (the files you want) to bottom (the files you have), by applying very general rules with wildcards you give to Snakemake.
+
+## Install Snakemake
+
+Install Snakemake using Mamba. For installation details, see the [link](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
 ```
 # To activate this environment, use
 #
+#     $ conda info --envs
 #     $ conda activate snakemake
 #     $ snakemake --help
 #
@@ -21,7 +35,7 @@ Install with Mamba. Instructions in the [link](https://snakemake.readthedocs.io/
 #     $ conda deactivate
 ```
 
-## snakefiles
+## Snakefiles
 
 Snakemake work flows ("snakefiles") are python code (all the python syntax rules apply).
 
@@ -126,7 +140,7 @@ To debug R scripts, you can save the workspace with save.image(), and invoke R a
 
 It is best practice to wrap the actual code into a separate function. This increases the portability if the code shall be invoked outside of Snakemake or from a different rule. A convenience method, snakemake@source(), acts as a wrapper for the normal R source() function, and can be used to source files relative to the original script directory.
 
-### R Markdown
+## R Markdown
 
 An R Markdown file can be integrated in the same way as R and Python scripts, but only a single output (html) file can be used:
 
@@ -181,3 +195,94 @@ Test include from snakemake `r snakemake@input`.
 print("Loading phyloeq object")
 load(snakemake@input$phyloseq_file)
 ```
+
+## Configuration
+
+Snakemake allows you to use configuration files for making your workflows more flexible and also for abstracting away direct dependencies. A configuration is provided as a JSON or YAML file and can be loaded with:
+
+```
+configfile: "path/to/config.yaml"
+```
+
+The config file can be used to define a dictionary of configuration parameters and their values. In the workflow, the configuration is accessible via the global variable config, e.g.
+
+```
+rule all:
+    input:
+        expand("{sample}.{param}.output.pdf", sample=config["samples"], param=config["yourparam"])
+```
+
+## Wildcards
+
+In Snakemake the workflow is determined from the top, i.e. from the target files. Imagine you have a directory with files `1.fastq, 2.fastq, 3.fastq, ...`, and you want to produce files `1.bam, 2.bam, 3.bam, ...`. You should specify these as target files, using the ids `1,2,3,...`. You could end up with at least two rules like this (or any number of intermediate steps):
+
+```
+IDS = "1 2 3 ...".split() # the list of desired ids
+
+# a pseudo-rule that collects the target files
+rule all:
+    input:  expand("otherdir/{id}.bam", id=IDS)
+
+# a general rule using wildcards that does the work
+rule:
+    input:  "thedir/{id}.fastq"
+    output: "otherdir/{id}.bam"
+    shell:  "..."
+```
+Snakemake will then go down the line and determine which files it needs from your initial directory.
+
+### Function `glob_wildcards`
+
+In order to infer the IDs from present files, Snakemake provides the glob_wildcards function, e.g.
+
+```
+IDS, = glob_wildcards("thedir/{id}.fastq")
+```
+
+The function matches the given pattern against the files present in the filesystem and thereby infers the values for all wildcards in the pattern. A named tuple that contains a list of values for each wildcard is returned. Here, this named tuple has only one item, that is the list of values for the wildcard ``{id}`.
+
+## Configure workflow
+
+Configure the workflow according to your needs via editing the files in the `config/` folder. Adjust `config.yaml` to configure the workflow execution, and `samples.tsv` to specify your sample setup. [TODO]
+
+## Execute workflow
+
+Activate the conda environment:
+```
+    conda activate snakemake
+```
+Test your configuration by performing a dry-run via
+```
+    snakemake --use-conda -n
+```
+Execute the workflow locally via
+``
+    snakemake --use-conda --cores $N
+```
+using `$N` cores.
+
+
+## Investigate results
+
+After successful execution, you can create a self-contained interactive HTML report with all results via:
+```
+    snakemake --report report.html
+```
+
+## Working Directory
+
+All paths in the snakefile are interpreted relative to the directory snakemake is executed in.
+
+This behaviour can be overridden by specifying a workdir in the snakefile:
+
+```
+workdir: "path/to/workdir"
+```
+
+Usually, it is preferred to only set the working directory via the command line, because above directive limits the portability of Snakemake workflows.
+
+## Best practices
+
+- It is a good idea to stick to a standardized folder structure that is expected by users of Snakemake. It is available [here](https://github.com/snakemake-workflows/cookiecutter-snakemake-workflow). Configuration of a workflow should be handled via `config` files. Use such configuration for metadata and experiement information, not for runtime specific configuration like threads, resources and output folders.  For those, just rely on Snakemake's CLI arguments like `--directory`.
+
+- Try to keep filenames short, but informative. Avoid mixing of too many special characters (e.g. decide whether to use `_` as a separator and do that consistently throughout the workflow).

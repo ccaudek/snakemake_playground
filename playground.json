@@ -1,0 +1,8 @@
+{
+  "full_name": "Corrado Caudek",
+  "email": "corrado.caudek@unifi.it",
+  "username": "ccaudek",
+  "project_name": "Snakemake_playground",
+  "repo_name": "snakemake_playground",
+  "min_snakemake_version": "5.7.0"
+}

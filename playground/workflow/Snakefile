@@ -1,0 +1,36 @@
+# Snakemake playground workflow
+#
+# @ccaudek
+
+
+# Require Snakemake >= this version
+from snakemake.utils import min_version
+min_version("6.12.3")
+
+
+## ------------------------------------------------------------------------------------ ##
+## Importing Configuration Files
+## ------------------------------------------------------------------------------------ ##
+
+# configfile: "paths.yaml"
+
+
+
+## ------------------------------------------------------------------------------------ ##
+## Load rules
+## ------------------------------------------------------------------------------------ ##
+
+rule all:
+    input:
+        "../results/plots/figure_1.pdf",
+        "../results/plots/figure_2.pdf",
+        "../results/data/processed/penguin_subset.rds",
+        "../results/tables/tab_1.txt",
+        "../results/reports/report.html",
+        "../results/plots/hist_1.pdf"
+
+
+include: "rules/common.smk"
+include: "rules/eda.smk"
+include: "rules/histogram.smk"
+include: "rules/render_report.smk"
