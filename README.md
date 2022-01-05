@@ -1,6 +1,6 @@
-# Snakemake workflow: {{snakemake_playground_project}}
+# Snakemake workflow: {{snakemake_playground}}
 
-[![Snakemake](https://img.shields.io/badge/snakemake-≥{{cookiecutter.min_snakemake_version}}-brightgreen.svg)](https://snakemake.bitbucket.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥{{6.12.3}}-brightgreen.svg)](https://snakemake.bitbucket.io)
 [![Build Status](https://travis-ci.org/snakemake-workflows/{{cookiecutter.repo_name}}.svg?branch=master)](https://travis-ci.org/snakemake-workflows/{{cookiecutter.repo_name}})
 
 This is a simple example of a Snakemake workflow using R.
