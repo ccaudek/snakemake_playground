@@ -1,18 +1,12 @@
-# Snakemake workflow: snakemake_playground
+# Snakemake workflow: snakemake playground
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.12.3-brightgreen.svg)](https://snakemake.bitbucket.io)
 
-This is a simple example of a Snakemake workflow using R.
-
-Insert your code into the respective folders, i.e. `scripts`, `rules`, and `envs`. Define the entry point of the workflow in the `Snakefile` and the main configuration in the `config.yaml` file.
+This is a simple example of a Snakemake workflow using R. The text in this README has been copied from various sources, especially from the official Snakemake documentation.
 
 ## Authors
 
 * Corrado Caudek (@ccaudek)
-
-## Notes
-
-This README contains the notes that I found useful while studying Snakemake. The text has been copied from various sources, especially from the official Snakemake documentation.
 
 ## Introduction
 
