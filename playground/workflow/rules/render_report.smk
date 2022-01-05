@@ -1,4 +1,3 @@
-
 rule make_report:
     input:
         "../results/data/processed/penguin_subset.rds",

@@ -1,4 +1,3 @@
-
 rule make_histogram:
     input:
         penguins_data="scripts/data/penguins.csv",

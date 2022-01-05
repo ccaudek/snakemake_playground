@@ -1,7 +1,6 @@
 # Snakemake workflow: snakemake_playground
 
-[![Snakemake](https://img.shields.io/badge/snakemake-≥{{6.12.3}}-brightgreen.svg)](https://snakemake.bitbucket.io)
-[![Build Status](https://travis-ci.org/snakemake-workflows/{{cookiecutter.repo_name}}.svg?branch=master)](https://travis-ci.org/snakemake-workflows/{{cookiecutter.repo_name}})
+[![Snakemake](https://img.shields.io/badge/snakemake-≥6.12.3-brightgreen.svg)](https://snakemake.bitbucket.io)
 
 This is a simple example of a Snakemake workflow using R.
 
@@ -121,7 +120,7 @@ The actual R code to generate the plot is hidden in the script scripts/script.R.
 - When the rule is present in the Snakefile file, with the standardized directory structure the path for accessing an R script is `"scripts/script.R"`.
 - If the rule is moved into a `.smk` file in the `rules` folder, the path for accessing an R script is `"../scripts/script.R"`.
 
-In R scripts, an S4 object named snakemake is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`. 
+In R scripts, an S4 object named snakemake is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
 
 A script written in R would look like this:
 

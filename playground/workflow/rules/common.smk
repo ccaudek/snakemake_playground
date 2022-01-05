@@ -1,4 +1,3 @@
-
 ## clean                : removes all content from out/ directory
 rule clean:
     # input:

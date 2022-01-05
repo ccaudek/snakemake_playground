@@ -1,5 +1,3 @@
-
-
 rule save_table:
     input:
         penguins_subset="../results/data/processed/penguin_subset.rds",
