@@ -16,16 +16,14 @@ A Snakemake workflow is defined by specifying rules in a Snakefile. Rules decomp
 
 Install Snakemake using Mamba. For installation details, see the [link](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
-```
+```sh
 # To activate this environment, use
-#
-#     $ conda info --envs
-#     $ conda activate snakemake
-#     $ snakemake --help
-#
+conda info --envs
+conda activate snakemake
+snakemake --help
+
 # To deactivate an active environment, use
-#
-#     $ conda deactivate
+conda deactivate
 ```
 
 ## Snakefiles
@@ -38,7 +36,7 @@ Snakemake work flows ("snakefiles") are python code (all the python syntax rules
 - Inputs are optional 
 - Inputs can have “symbolic” names
 
-```
+```snakemake
 rule align:
     input:
       index=“hg19”, data=“sample1.fastq” 
@@ -66,7 +64,7 @@ The shell directive is followed by a Python string containing the shell command 
 - Multi-line shell statements: use triple-quotes 
 - Can load modules, only affects the current rule.
 
-```
+```snakemake
 rule link:
         input: "hello_world.o"
         output: "hello_world"
@@ -83,7 +81,7 @@ rule link:
 - Put this in the “run:” section of the rule
 - Note there are no quotes around the python code
 
-```
+```snakemake
 rule usercount:
     input: "userfile.txt"
     output: "users.count"
@@ -97,7 +95,7 @@ rule usercount:
 
 A rule can also point to an external script instead of a shell command or inline Python code. For this purpose, Snakemake offers the script directive. This mechanism also allows you to integrate R and R Markdown scripts with Snakemake, e.g.
 
-```
+```snakemake
 rule NAME:
     input:
         myfile="path/to/inputfile",
@@ -116,11 +114,11 @@ The actual R code to generate the plot is hidden in the script scripts/script.R.
 - When the rule is present in the Snakefile file, with the standardized directory structure the path for accessing an R script is `"scripts/script.R"`.
 - If the rule is moved into a `.smk` file in the `rules` folder, the path for accessing an R script is `"../scripts/script.R"`.
 
-In R scripts, an S4 object named `snakemake is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
+In R scripts, an S4 object named `snakemake` is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
 
 A script written in R would look like this:
 
-```
+```r
 do_something <- function(
     data_path, out_path, threads, myparam
     ) {
@@ -137,13 +135,13 @@ do_something(
 
 To debug R scripts, you can save the workspace with save.image(), and invoke R after Snakemake has terminated. Then you can use the usual R debugging facilities while having access to the snakemake variable.
 
-It is best practice to wrap the actual code into a separate function. This increases the portability if the code shall be invoked outside of Snakemake or from a different rule. A convenience method, snakemake@source(), acts as a wrapper for the normal R source() function, and can be used to source files relative to the original script directory.
+It is best practice to wrap the actual code into a separate function. This increases the portability if the code shall be invoked outside of Snakemake or from a different rule. A convenience method, `snakemake@source()`, acts as a wrapper for the normal R `source()` function, and can be used to source files relative to the original script directory.
 
 ## R Markdown
 
 An R Markdown file can be integrated in the same way as R and Python scripts, but only a single output (html) file can be used:
 
-```
+```snakemake
 rule NAME:
     input:
         "path/to/inputfile",
@@ -156,7 +154,7 @@ rule NAME:
 
 In the R Markdown file you can insert output from a R command, and access variables stored in the S4 object named snakemake
 
-```
+```markdown
 ---
 title: "Test Report"
 author:
@@ -189,33 +187,17 @@ Test include from snakemake `r snakemake@input`.
 
 - An R S4 object means that the syntax is something like this:
 
-```
+```r
 # load data
 print("Loading phyloeq object")
 load(snakemake@input$phyloseq_file)
 ```
 
-## Configuration
-
-Snakemake allows you to use configuration files for making your workflows more flexible and also for abstracting away direct dependencies. A configuration is provided as a JSON or YAML file and can be loaded with:
-
-```
-configfile: "path/to/config.yaml"
-```
-
-The config file can be used to define a dictionary of configuration parameters and their values. In the workflow, the configuration is accessible via the global variable config, e.g.
-
-```
-rule all:
-    input:
-        expand("{sample}.{param}.output.pdf", sample=config["samples"], param=config["yourparam"])
-```
-
 ## Wildcards
 
-In Snakemake the workflow is determined from the top, i.e. from the target files. Imagine you have a directory with files `1.fastq, 2.fastq, 3.fastq, ...`, and you want to produce files `1.bam, 2.bam, 3.bam, ...`. You should specify these as target files, using the ids `1,2,3,...`. You could end up with at least two rules like this (or any number of intermediate steps):
+Snakemake allows to generalize rules by using named wildcards. In Snakemake the workflow is determined from the top, i.e. from the target files. Imagine you have a directory with files `1.fastq, 2.fastq, 3.fastq, ...`, and you want to produce files `1.bam, 2.bam, 3.bam, ...`. You should specify these as target files, using the ids `1,2,3,...`. You could end up with at least two rules like this (or any number of intermediate steps):
 
-```
+```snakemake
 IDS = "1 2 3 ...".split() # the list of desired ids
 
 # a pseudo-rule that collects the target files
@@ -234,46 +216,76 @@ Snakemake will then go down the line and determine which files it needs from you
 
 In order to infer the IDs from present files, Snakemake provides the glob_wildcards function, e.g.
 
-```
+```snakemake
 IDS, = glob_wildcards("thedir/{id}.fastq")
 ```
 
 The function matches the given pattern against the files present in the filesystem and thereby infers the values for all wildcards in the pattern. A named tuple that contains a list of values for each wildcard is returned. Here, this named tuple has only one item, that is the list of values for the wildcard ``{id}`.
 
-## Configure workflow
 
-Configure the workflow according to your needs via editing the files in the `config/` folder. Adjust `config.yaml` to configure the workflow execution, and `samples.tsv` to specify your sample setup. [TODO]
+
+
+
+## Configuration
+
+Snakemake allows you to use configuration files for making your workflows more flexible and also for abstracting away direct dependencies. A configuration is provided as a JSON or YAML file and can be loaded with the `configfile` directive:
+
+```snakemake
+configfile: "path/to/config.yaml"
+```
+
+Adjust `config.yaml` in the `config/` folder to configure the workflow execution.
+
+The config file can be used to define a dictionary of configuration parameters and their values. In the workflow, the configuration is accessible via the global variable `config`. For example, we can add the following line at the top of our `Snakefile``
+
+```snakemake
+configfile: "config.yml"
+SAMPLES = config["samples"]
+```
+
+Then, we need to create our configuration file by pasting the following into a new file called `config.yml`
+
+```snakemake
+samples:
+    - SRR097977
+    - SRR098026
+```
 
 ## Execute workflow
 
 Activate the conda environment:
-```
-    conda activate snakemake
+
+```sh
+conda activate snakemake
 ```
 Test your configuration by performing a dry-run via
-```
-    snakemake --use-conda -n
+
+```sh
+snakemake --use-conda -n
 ```
 Execute the workflow locally via
-```
-    snakemake --use-conda --cores $N
+
+```sh
+snakemake --use-conda --cores $N
 ```
 using `$N` cores.
 
+Snakemake only re-runs jobs if one of the input files is newer than one of the output files or one of the input files will be updated by another job.
 
 ## Investigate results
 
 After successful execution, you can create a self-contained interactive HTML report with all results via:
-```
-    snakemake --report report.html
+
+```sh
+snakemake --report report.html
 ```
 
 ## Working Directory
 
 All paths in the snakefile are interpreted relative to the directory snakemake is executed in. This behaviour can be overridden by specifying a workdir in the snakefile:
 
-```
-   workdir: "path/to/workdir"
+```snakemake
+workdir: "path/to/workdir"
 ```
 
 Usually, it is preferred to only set the working directory via the command line, because above directive limits the portability of Snakemake workflows.
@@ -282,7 +294,7 @@ Usually, it is preferred to only set the working directory via the command line,
 
 A particular output file may require a huge amount of computation time. Hence one might want to protect it against accidental deletion or overwriting. Snakemake allows this by marking such a file as `protected`:
 
-```
+```snakemake
 rule NAME:
     input:
         "path/to/inputfile"
@@ -296,7 +308,9 @@ A protected file will be write-protected after the rule that produces it is comp
 
 ## Integrated Package Management
 
-The `Conda package manager` is used to obtain and deploy the defined software packages in the specified versions. Packages will be installed into your working directory, without requiring any admin/root privileges. Given that conda is available on your system, to use the Conda integration, add the `--use-conda` flag to your workflow execution command, e.g. `snakemake --cores 8 --use-conda`. 
+The `Conda package manager` is used to obtain and deploy the defined software packages in the specified versions. Packages will be installed into your working directory. Given that conda is available on your system, to use the Conda integration, add the `--use-conda` flag to your workflow execution command, e.g. `snakemake --cores 8 --use-conda`. 
+
+TODO: A better explanation is provided [here](https://github.com/kdm9/2020_snakemake-workshop).
 
 ## Best practices
 
