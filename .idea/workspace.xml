@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73abc4b1-c35e-4669-9b02-3b1700ff262d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/snakemake_playground.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/snakemake_playground.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy90YWJsZXMvdGFiXzEudHh0" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy90YWJsZXMvdGFiXzEudHh0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9kYXRhL3Byb2Nlc3NlZC9wZW5ndWluX3N1YnNldC5yZHM=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9kYXRhL3Byb2Nlc3NlZC9wZW5ndWluX3N1YnNldC5yZHM=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMS5wZGY=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMS5wZGY=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMi5wZGY=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMi5wZGY=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9oaXN0XzEucGRm" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9oaXN0XzEucGRm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9yZXBvcnRzL3JlcG9ydC5odG1s" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9yZXBvcnRzL3JlcG9ydC5odG1s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/Snakefile" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/Snakefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/rules/eda.smk" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/rules/eda.smk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/scripts/figures/plot_penguins.R" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/scripts/figures/plot_penguins.R" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +37,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -35,5 +51,16 @@
       <updated>1641367675704</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

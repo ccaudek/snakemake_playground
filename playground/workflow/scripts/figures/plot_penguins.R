@@ -1,12 +1,12 @@
 # Script recovered from
 # https://github.com/kpj/rna-seq-star-deseq2/blob/master/workflow/scripts/plot-pca.R
 
-
 log <- file(snakemake@log[[1]], open="wt")
 sink(log)
 sink(log, type="message")
 
 library("rio")
+library("magrittr")
 library("tidyverse")
 library("tidyr")
 library("viridis")
@@ -14,11 +14,6 @@ library("viridis")
 
 # load deseq2 data
 d <- rio::import(snakemake@input[["penguins_data"]])
-
-# obtain normalized counts
-# counts <- rlog(dds, blind=FALSE)
-# svg(snakemake@output[[1]])
-# plotPCA(counts, intgroup=snakemake@params[["pca_labels"]])
 
 mytitle <- snakemake@params[["title_label"]]
 my_x1_label <- snakemake@params[["x1_label"]]

@@ -109,12 +109,14 @@ rule NAME:
         "scripts/script.R"
 ```
 
+Although there are other strategies to invoke separate scripts from your workflow (for example, invoking them via shell commands), the benefit of this is obvious: the script logic is separated from the workflow logic (and can even be shared between workflows), but boilerplate code like the **parsing of command line arguments is unnecessary**. It is best practice to use the script directive whenever an inline code block would have more than a few lines of code.
+
 The actual R code to generate the plot is hidden in the script scripts/script.R. Script paths are always relative to the referring Snakefile. In the script, all properties of the rule like input, output, wildcards, etc. are available as attributes of a global snakemake object.
 
 - When the rule is present in the Snakefile file, with the standardized directory structure the path for accessing an R script is `"scripts/script.R"`.
 - If the rule is moved into a `.smk` file in the `rules` folder, the path for accessing an R script is `"../scripts/script.R"`.
 
-In R scripts, an S4 object named snakemake is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
+In R scripts, an S4 object named `snakemake is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
 
 A script written in R would look like this:
 
@@ -253,7 +255,7 @@ Test your configuration by performing a dry-run via
     snakemake --use-conda -n
 ```
 Execute the workflow locally via
-``
+```
     snakemake --use-conda --cores $N
 ```
 using `$N` cores.
@@ -268,15 +270,33 @@ After successful execution, you can create a self-contained interactive HTML rep
 
 ## Working Directory
 
-All paths in the snakefile are interpreted relative to the directory snakemake is executed in.
-
-This behaviour can be overridden by specifying a workdir in the snakefile:
+All paths in the snakefile are interpreted relative to the directory snakemake is executed in. This behaviour can be overridden by specifying a workdir in the snakefile:
 
 ```
-workdir: "path/to/workdir"
+   workdir: "path/to/workdir"
 ```
 
 Usually, it is preferred to only set the working directory via the command line, because above directive limits the portability of Snakemake workflows.
+
+## Protected and Temporary Files
+
+A particular output file may require a huge amount of computation time. Hence one might want to protect it against accidental deletion or overwriting. Snakemake allows this by marking such a file as `protected`:
+
+```
+rule NAME:
+    input:
+        "path/to/inputfile"
+    output:
+        protected("path/to/outputfile")
+    shell:
+        "somecommand {input} {output}"
+```
+
+A protected file will be write-protected after the rule that produces it is completed.
+
+## Integrated Package Management
+
+The `Conda package manager` is used to obtain and deploy the defined software packages in the specified versions. Packages will be installed into your working directory, without requiring any admin/root privileges. Given that conda is available on your system, to use the Conda integration, add the `--use-conda` flag to your workflow execution command, e.g. `snakemake --cores 8 --use-conda`. 
 
 ## Best practices
 
