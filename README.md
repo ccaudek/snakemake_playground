@@ -1,8 +1,8 @@
-# Snakemake workflow: snakemake playground
+# Snakemake playground
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.12.3-brightgreen.svg)](https://snakemake.bitbucket.io)
 
-This is a simple example of a Snakemake workflow using R. The text in this README has been copied from various sources, especially from the official Snakemake documentation.
+This is a simple example of a Snakemake workflow with external scripts in R. The text in this README has been copied from various sources (especially from the official Snakemake documentation).
 
 ## Authors
 
