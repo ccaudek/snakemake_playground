@@ -10,7 +10,7 @@ library("here")
 
 # load data
 # For debugging:
-# d <- rio::import(here::here("scripts", "data", "penguins.csv"))
+# d <- rio::import(here::here("playground", "workflow", "scripts", "data", "penguins.csv"))
 d <- rio::import(snakemake@input$penguins_data)
 
 my_title <- snakemake@params$title_label
