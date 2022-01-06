@@ -42,13 +42,13 @@ Snakemake work flows ("snakefiles") are python code (all the python syntax rules
 ```snakemake
 rule align:
     input:
-      index=“hg19”, data=“sample1.fastq” 
+      index="hg19", data="sample1.fastq"
     output:
-      ”sample1.sam” 
+      "sample1.sam"
     shell:
-      “bwa mem {input.index} {input.data} –o {output}”
+      "bwa mem {input.index} {input.data} –o {output}”
     message:
-      “Rule {rule} aligning input file {input.data}”
+      "Rule {rule} aligning input file {input.data}"
 ```
 
 ### `output` section
@@ -292,6 +292,22 @@ workdir: "path/to/workdir"
 ```
 
 Usually, it is preferred to only set the working directory via the command line, because above directive limits the portability of Snakemake workflows.
+
+## Reports
+
+It is possible to automatically generate detailed self-contained HTML reports that encompass runtime statistics, provenance information, workflow topology and results. 
+
+Create the file `<PROJECT-NAME/workflow/report/workflow.rst>` with a brief description of the project. In the `Snakefile`, add the directive
+
+```snakemake
+report: "report/workflow.rst"
+```
+
+To create the report, run
+
+```sh
+snakemake --cores 4 --report
+```
 
 ## Protected and Temporary Files
 
