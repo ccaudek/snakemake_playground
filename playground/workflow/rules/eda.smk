@@ -11,7 +11,7 @@ rule save_table:
 
 rule save_figures:
     input:
-        penguins_data="scripts/data/penguins.csv"
+        penguins_data=config["raw_data"]
     output:
         fig1="../results/plots/figure_1.pdf",
         fig2="../results/plots/figure_2.pdf",

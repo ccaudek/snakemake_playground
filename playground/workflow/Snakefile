@@ -7,9 +7,9 @@
 from snakemake.utils import min_version
 min_version("6.12.3")
 
-report: "report/workflow.rst"
+configfile: "../config/config.yaml"
 
-# configfile: "paths.yaml"
+report: "report/workflow.rst"
 
 rule all:
     input:

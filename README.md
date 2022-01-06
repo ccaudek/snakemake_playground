@@ -225,33 +225,25 @@ IDS, = glob_wildcards("thedir/{id}.fastq")
 
 The function matches the given pattern against the files present in the filesystem and thereby infers the values for all wildcards in the pattern. A named tuple that contains a list of values for each wildcard is returned. Here, this named tuple has only one item, that is the list of values for the wildcard ``{id}`.
 
-
-
-
-
 ## Configuration
 
-Snakemake allows you to use configuration files for making your workflows more flexible and also for abstracting away direct dependencies. A configuration is provided as a JSON or YAML file and can be loaded with the `configfile` directive:
+Snakemake allows you to use configuration files for making your workflows more flexible and also for abstracting away direct dependencies. A configuration is provided as a JSON or YAML file and can be loaded with the `configfile` directive. The config file can be used to define a dictionary of configuration parameters and their values. In the present example, the file `config.yaml` provides the specification:
 
-```snakemake
-configfile: "path/to/config.yaml"
+```yaml
+raw_data: scripts/data/penguins.csv
 ```
 
-Adjust `config.yaml` in the `config/` folder to configure the workflow execution.
-
-The config file can be used to define a dictionary of configuration parameters and their values. In the workflow, the configuration is accessible via the global variable `config`. For example, we can add the following line at the top of our `Snakefile``
+The `Snakefile` includes:
 
 ```snakemake
-configfile: "config.yml"
-SAMPLES = config["samples"]
+configfile: "../config/config.yaml"
 ```
 
-Then, we need to create our configuration file by pasting the following into a new file called `config.yml`
+In the workflow, the configuration is accessible via the global variable `config`. For example, the `eda.smk` rule has:
 
 ```snakemake
-samples:
-    - SRR097977
-    - SRR098026
+input:
+    penguins_data=config["raw_data"]
 ```
 
 ## Execute workflow
