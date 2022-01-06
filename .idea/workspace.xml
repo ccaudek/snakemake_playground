@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73abc4b1-c35e-4669-9b02-3b1700ff262d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/rMarkdownGraphicsSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/playground/config/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy90YWJsZXMvdGFiXzEudHh0" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy90YWJsZXMvdGFiXzEudHh0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9kYXRhL3Byb2Nlc3NlZC9wZW5ndWluX3N1YnNldC5yZHM=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9kYXRhL3Byb2Nlc3NlZC9wZW5ndWluX3N1YnNldC5yZHM=" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMS5wZGY=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMS5wZGY=" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMi5wZGY=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMi5wZGY=" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9oaXN0XzEucGRm" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9oaXN0XzEucGRm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9yZXBvcnRzL3JlcG9ydC5odG1s" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9yZXBvcnRzL3JlcG9ydC5odG1s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground/workflow/Snakefile" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/Snakefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground/workflow/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground/workflow/rules/common.smk" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/rules/common.smk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground/workflow/rules/histogram.smk" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/rules/histogram.smk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playground/workflow/rules/render_report.smk" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/rules/render_report.smk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/scripts/reports/report.Rmd" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/scripts/reports/report.Rmd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

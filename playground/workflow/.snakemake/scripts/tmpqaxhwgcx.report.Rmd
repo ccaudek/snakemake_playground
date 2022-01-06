@@ -16,6 +16,51 @@ output:
     collapsed: no
     smooth_scroll: yes
 ---
+            ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+######## snakemake preamble start (automatically inserted, do not edit) ########
+library(methods)
+Snakemake <- setClass(
+    "Snakemake",
+    slots = c(
+        input = "list",
+        output = "list",
+        params = "list",
+        wildcards = "list",
+        threads = "numeric",
+        log = "list",
+        resources = "list",
+        config = "list",
+        rule = "character",
+        bench_iteration = "numeric",
+        scriptdir = "character",
+        source = "function"
+    )
+)
+snakemake <- Snakemake(
+    input = list('../results/data/processed/penguin_subset.rds'),
+    output = list('../results/reports/report.html'),
+    params = list('scripts/data/penguins.csv', '../results/tables/tab_1.txt', "data" = 'scripts/data/penguins.csv', "second_param" = '../results/tables/tab_1.txt'),
+    wildcards = list(),
+    threads = 1,
+    log = list(),
+    resources = list('tmpdir', "tmpdir" = '/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T'),
+    config = list("raw_data" = 'scripts/data/penguins.csv'),
+    rule = 'make_report',
+    bench_iteration = as.numeric(NA),
+    scriptdir = '/Users/corrado/_repositories/snakemake_playground/playground/workflow/rules/../scripts/reports',
+    source = function(...){
+        wd <- getwd()
+        setwd(snakemake@scriptdir)
+        source(...)
+        setwd(wd)
+    }
+)
+
+######## snakemake preamble end #########
+
+            ```
+
 
 
 ```{r}
@@ -87,22 +132,11 @@ rule save_table:
 ```
 
 
-### Displaying the content of an external .txt file
+### Reading an external txt file
 
-I read the address of the file:
-
-```{r}
-foo <- snakemake@params[["second_param"]]
-foo
+```{r engine='bash', comment=''}
+cat `r snakemake@params[["second_param"]]`
 ```
-
-The address in the object `foo` is enclosed in quotes. This is the argument of the function `readLines()`.  With the following syntax, I get the desired result. The chunk needs the specification `{r comment=''}`:
-
-```{r comment=''}
-cat(readLines(foo), sep = '\n')
-```
-
-
 
 ## Source
 <a download="report.Rmd" href="`r base64enc::dataURI(file = params$rmd, mime = 'text/rmd', encoding = 'base64')`">R Markdown source file (to produce this document)</a>
