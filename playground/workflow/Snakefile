@@ -17,8 +17,8 @@ rule all:
         "../results/plots/figure_2.pdf",
         "../results/data/processed/penguin_subset.rds",
         "../results/tables/tab_1.txt",
+        "../results/plots/hist_1.pdf",
         "../results/reports/report.html",
-        "../results/plots/hist_1.pdf"
 
 
 include: "rules/common.smk"

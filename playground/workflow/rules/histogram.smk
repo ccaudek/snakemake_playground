@@ -1,6 +1,6 @@
 rule make_histogram:
     input:
-        penguins_data="scripts/data/penguins.csv"
+        penguins_data=config["raw_data"]
     output:
         hist1="../results/plots/hist_1.pdf"
     params:

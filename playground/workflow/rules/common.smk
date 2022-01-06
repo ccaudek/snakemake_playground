@@ -1,4 +1,4 @@
-## clean                : removes all content from out/ directory
+## clean                : removes all content from results/ directory
 rule clean:
     # input:
     #     expand("../results/{dir}", dir=["logs", "plots", "tables", "data"])

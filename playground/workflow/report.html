@@ -406,7 +406,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="https://snakemake.readthedocs.io">Snakemake Report</a>
       <div class="nav navbar-nav navbar-center" id="brand"></div>
       <ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
-        <li class="text-white">Thu Jan  6 09:29:17 2022 CET</li>
+        <li class="text-white">Thu Jan  6 13:32:18 2022 CET</li>
         <li><a class="text-white" href="https://snakemake.readthedocs.io">Snakemake 6.12.3</a></li>
       </ul>
       <!--<input id="searchbar" class="invisible form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
@@ -427,6 +427,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
                 <a class="nav-link panel-link" data-panel="statistics" href="javascript:void(0)">
                   <span data-feather="bar-chart-2"></span>
                   Statistics
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link panel-link" data-panel="configuration" href="javascript:void(0)">
+                  <span data-feather="settings"></span>
+                  Configuration
                 </a>
               </li>
             </ul>
@@ -472,6 +478,41 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
             </div>
           </div>
 
+          <div class="panel" id="configuration">
+            <h2>Configuration</h2>
+            <table class="table">
+              <caption>Configuration files</caption>
+              <thead>
+                <tr>
+                  <th scope="col">File</th>
+                  <th scope="col">Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <a data-toggle="collapse" role="button" href="#configfile-" aria-expanded="false" aria-controls="collapse-env"><span data-feather="plus-circle"></span></a>
+                      <div class="collapse" id="configfile-">
+                        <table class="sourcetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="source"><pre><span></span><code><span class="c1"># This file should contain everything to configure the workflow on a global scale.</span>
+<span class="c1"># In case of sample based data, it should be complemented by a samples.tsv file that contains</span>
+<span class="c1"># one row per sample. It can be parsed easily via pandas.</span>
+<span class="nt">samples</span><span class="p">:</span> <span class="s">&quot;config/samples.tsv&quot;</span>
+
+<span class="nt">raw_data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scripts/data/penguins.csv</span>
+</code></pre></div>
+</td></tr></table>
+                      </div>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
 
           <div class="panel" id="panel-loading-screen">
             <p class="animation">Loading...</p>
@@ -1474,7 +1515,7 @@ if (typeof module !== 'undefined') {
       var runtimes_spec = {
         "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
         "description": "Runtimes of jobs.",
-        "data": {"values": [{'rule': 'make_histogram', 'runtime': 1.773315191268921}, {'rule': 'make_report', 'runtime': 0.7877731323242188}, {'rule': 'save_figures', 'runtime': 1.8375329971313477}, {'rule': 'save_table', 'runtime': 1.3637056350708008}]},
+        "data": {"values": [{'rule': 'make_histogram', 'runtime': 3.144652843475342}, {'rule': 'make_report', 'runtime': 1.5881736278533936}, {'rule': 'save_figures', 'runtime': 3.117579460144043}, {'rule': 'save_table', 'runtime': 1.47590970993042}]},
         "mark": "point",
         "encoding": {
           "x": {"field": "runtime", "type": "quantitative",
@@ -1491,7 +1532,7 @@ if (typeof module !== 'undefined') {
         "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
         "description": "Timeline of jobs.",
         "data": {
-          "values": [{'rule': 'make_histogram', 'starttime': '2022-01-05T17:49:03.036412', 'endtime': '2022-01-05T17:49:04.809727'}, {'rule': 'make_report', 'starttime': '2022-01-05T17:49:04.880851', 'endtime': '2022-01-05T17:49:05.668624'}, {'rule': 'save_figures', 'starttime': '2022-01-05T17:49:03.039506', 'endtime': '2022-01-05T17:49:04.877039'}, {'rule': 'save_table', 'starttime': '2022-01-05T17:49:04.884180', 'endtime': '2022-01-05T17:49:06.247886'}]
+          "values": [{'rule': 'make_histogram', 'starttime': '2022-01-06T13:21:50.070878', 'endtime': '2022-01-06T13:21:53.215531'}, {'rule': 'make_report', 'starttime': '2022-01-06T13:21:53.196396', 'endtime': '2022-01-06T13:21:54.784570'}, {'rule': 'save_figures', 'starttime': '2022-01-06T13:21:50.074044', 'endtime': '2022-01-06T13:21:53.191624'}, {'rule': 'save_table', 'starttime': '2022-01-06T13:21:53.199593', 'endtime': '2022-01-06T13:21:54.675503'}]
         },
         "mark": "point",
         "encoding": {
