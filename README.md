@@ -6,7 +6,7 @@ This is a simple example of a Snakemake workflow with external scripts in R. The
 
 ## Authors
 
-* Corrado Caudek <a href="https://orcid.org/0000-0002-1404-0420">
+Corrado Caudek <a href="https://orcid.org/0000-0002-1404-0420">
 <img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" />
 0000-0002-1404-0420
 </a> (@ccaudek)
