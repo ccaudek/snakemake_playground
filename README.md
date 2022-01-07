@@ -9,7 +9,7 @@ This is a simple example of a Snakemake workflow with external scripts in R. The
 Corrado Caudek <a href="https://orcid.org/0000-0002-1404-0420">
 <img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16" />
 0000-0002-1404-0420
-</a> 
+</a>
 
 ## Introduction
 
@@ -287,7 +287,7 @@ Usually, it is preferred to only set the working directory via the command line,
 
 ## Reports
 
-It is possible to automatically generate detailed self-contained HTML reports that encompass runtime statistics, provenance information, workflow topology and results. 
+It is possible to automatically generate detailed self-contained HTML reports that encompass runtime statistics, provenance information, workflow topology and results.
 
 Create the file `<PROJECT-NAME/workflow/report/workflow.rst>` with a brief description of the project. In the `Snakefile`, add the directive
 
@@ -319,7 +319,7 @@ A protected file will be write-protected after the rule that produces it is comp
 
 ## Integrated Package Management
 
-The `Conda package manager` is used to obtain and deploy the defined software packages in the specified versions. Packages will be installed into your working directory. Given that conda is available on your system, to use the Conda integration, add the `--use-conda` flag to your workflow execution command, e.g. `snakemake --cores 8 --use-conda`. 
+The `Conda package manager` is used to obtain and deploy the defined software packages in the specified versions. Packages will be installed into your working directory. Given that conda is available on your system, to use the Conda integration, add the `--use-conda` flag to your workflow execution command, e.g. `snakemake --cores 8 --use-conda`.
 
 TODO: A better explanation is provided [here](https://github.com/kdm9/2020_snakemake-workshop).
 

@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMi5wZGY=" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9maWd1cmVfMi5wZGY=" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9oaXN0XzEucGRm" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9wbG90cy9oaXN0XzEucGRm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9yZXBvcnRzL3JlcG9ydC5odG1s" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/.snakemake/metadata/Li4vcmVzdWx0cy9yZXBvcnRzL3JlcG9ydC5odG1s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playground/workflow/rules/render_report.smk" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/rules/render_report.smk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playground/workflow/scripts/reports/report.Rmd" beforeDir="false" afterPath="$PROJECT_DIR$/playground/workflow/scripts/reports/report.Rmd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

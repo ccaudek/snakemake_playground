@@ -24,4 +24,21 @@ rule all:
 include: "rules/common.smk"
 include: "rules/eda.smk"
 include: "rules/histogram.smk"
-include: "rules/render_report.smk"
+# include: "rules/render_report.smk"
+
+
+# It is simpler, because of the directory structure, to put the make_report rule in the Snakefile.
+rule make_report:
+    input:
+        data=config["raw_data"],
+        subset_data="../results/data/processed/penguin_subset.rds",
+        table_data=rules.save_table.output.tab1,
+        fig_pdf=rules.save_figures.output.fig2
+    output:
+        "../results/reports/report.html"
+    params:
+        pdf_fig1=config["playground_dir"] + "results/plots/figure_1.pdf"
+    log:
+        "../results/logs/make_report.log"
+    script:
+        "scripts/reports/report.Rmd"

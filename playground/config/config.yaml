@@ -3,3 +3,5 @@
 # one row per sample. It can be parsed easily via pandas.
 
 raw_data: "scripts/data/penguins.csv"
+
+playground_dir: "/Users/corrado/Documents/snakemake_workflows/snakemake_playground/playground/"

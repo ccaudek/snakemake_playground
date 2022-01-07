@@ -1,10 +1,10 @@
 rule make_report:
     input:
-        "../results/data/processed/penguin_subset.rds"
+        data=config["raw_data"],
+        subset_data="../results/data/processed/penguin_subset.rds",
+        table_data=rules.save_table.output.tab1,
+        fig_pdf=rules.save_figures.output.fig2
     output:
         "../results/reports/report.html"
-    params:
-        data=config["raw_data"],
-        second_param=rules.save_table.output.tab1
     script:
         "../scripts/reports/report.Rmd"
