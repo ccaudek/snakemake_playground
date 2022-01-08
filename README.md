@@ -298,22 +298,6 @@ snakemake --cores 4 --report
 
 With the present directory structure, the output will be saved in the workflow folder.
 
-### Environment
-
-It is possible to "freeze" an environment, with packages in R and python, and then to activate such environment.
-
-```sh
-# To activate this environment, use
-conda info --envs
-conda activate snakemake
-snakemake --help
-
-# To deactivate an active environment, use
-conda deactivate
-```
-
-TODO: describe how to create the environment.
-
 ## Protected and Temporary Files
 
 A particular output file may require a huge amount of computation time. Hence one might want to protect it against accidental deletion or overwriting. Snakemake allows this by marking such a file as `protected`:
@@ -334,7 +318,17 @@ A protected file will be write-protected after the rule that produces it is comp
 
 The `Conda package manager` is used to obtain and deploy the defined software packages in the specified versions. Packages will be installed into your working directory. Given that conda is available on your system, to use the Conda integration, add the `--use-conda` flag to your workflow execution command, e.g. `snakemake --cores 8 --use-conda`.
 
-TODO: A better explanation is provided [here](https://github.com/kdm9/2020_snakemake-workshop).
+```sh
+# To activate this environment, use
+conda info --envs
+conda activate snakemake
+snakemake --help
+
+# To deactivate an active environment, use
+conda deactivate
+```
+
+A better explanation is provided [here](https://github.com/kdm9/2020_snakemake-workshop).
 
 ## Best practices
 
