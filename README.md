@@ -241,35 +241,6 @@ input:
     penguins_data=config["raw_data"]
 ```
 
-## Execute workflow
-
-Activate the conda environment:
-
-```sh
-conda activate snakemake
-```
-Test your configuration by performing a dry-run via
-
-```sh
-snakemake --use-conda -n
-```
-Execute the workflow locally via
-
-```sh
-snakemake --use-conda --cores $N
-```
-using `$N` cores.
-
-Snakemake only re-runs jobs if one of the input files is newer than one of the output files or one of the input files will be updated by another job.
-
-## Investigate results
-
-After successful execution, you can create a self-contained interactive HTML report with all results via:
-
-```sh
-snakemake --report report.html
-```
-
 ## Working Directory
 
 All paths in the snakefile are interpreted relative to the directory snakemake is executed in. This behaviour can be overridden by specifying a workdir in the snakefile:
@@ -329,6 +300,28 @@ conda deactivate
 ```
 
 A better explanation is provided [here](https://github.com/kdm9/2020_snakemake-workshop).
+
+## Execute workflow
+
+Activate the conda environment:
+
+```sh
+conda activate snakemake
+```
+Test your configuration by performing a dry-run via
+
+```sh
+snakemake --use-conda -n
+```
+Execute the workflow locally via
+
+```sh
+snakemake --use-conda --cores $N
+```
+using `$N` cores.
+
+Snakemake only re-runs jobs if one of the input files is newer than one of the output files or one of the input files will be updated by another job.
+
 
 ## Best practices
 
