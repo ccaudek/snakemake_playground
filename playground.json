@@ -4,5 +4,5 @@
   "username": "ccaudek",
   "project_name": "Snakemake_playground",
   "repo_name": "snakemake_playground",
-  "min_snakemake_version": "5.7.0"
+  "min_snakemake_version": "6.12.3"
 }

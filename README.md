@@ -285,7 +285,7 @@ workdir: "path/to/workdir"
 
 Usually, it is preferred to only set the working directory via the command line, because above directive limits the portability of Snakemake workflows.
 
-## Reports
+## Workflow report
 
 It is possible to automatically generate detailed self-contained HTML reports that encompass runtime statistics, provenance information, workflow topology and results.
 
@@ -300,6 +300,8 @@ To create the report, run
 ```sh
 snakemake --cores 4 --report
 ```
+
+With the present directory structure, the output will be saved in the workflow folder.
 
 ## Protected and Temporary Files
 

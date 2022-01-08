@@ -1,15 +1,18 @@
 ## clean                : removes all content from results/ directory
 rule clean:
     # input:
-    #     expand("../results/{dir}", dir=["logs", "plots", "tables", "data"])
+    #     expand("../results/{dir}", dir=config["RES_DIRS"])
     log:
         "../results/logs/clean.log"
     shell:
         "rm -rf ../results/*"
+        # '''
+        # rm -rf {input}
+        # '''
 
-## ------------------------------------------------------------------------------------ ##
+## -----------------------------------------------------------------------------
 ## Success and failure messages
-## ------------------------------------------------------------------------------------ ##
+## -----------------------------------------------------------------------------
 
 onsuccess:
     print("\n 🎉 workflow complete!\n")

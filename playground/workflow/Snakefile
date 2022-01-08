@@ -7,38 +7,70 @@
 from snakemake.utils import min_version
 min_version("6.12.3")
 
+from pathlib import Path
+import os
+
+print(f"Current directory: {Path.cwd()}")
+print(f"Home directory: {Path.home()}")
+print(f"Working directory: {os.getcwd()}")
+
+# external_module/Snakefile
+my_basedir = workflow.current_basedir
+
+
 configfile: "../config/config.yaml"
 
 report: "report/workflow.rst"
 
-rule all:
+rule targets:
     input:
         "../results/plots/figure_1.pdf",
         "../results/plots/figure_2.pdf",
         "../results/data/processed/penguin_subset.rds",
         "../results/tables/tab_1.txt",
         "../results/plots/hist_1.pdf",
-        "../results/reports/report.html",
+        "../results/reports/report.html"
+        #"scripts/reports/my_report.html"
 
 
 include: "rules/common.smk"
 include: "rules/eda.smk"
 include: "rules/histogram.smk"
-# include: "rules/render_report.smk"
 
 
-# It is simpler, because of the directory structure, to put the make_report rule in the Snakefile.
+# Because of the directory structure, it is simpler to put the make_report
+# rule in the Snakefile.
+
+# It is not possible to specify the address of the figures in `input:`, because
+# after a clean such figures do not exist. Instead, the address of the figures
+# that will be created *before* the make_report rule is executed can be
+# specified in `params:`.
+
 rule make_report:
     input:
         data=config["raw_data"],
         subset_data="../results/data/processed/penguin_subset.rds",
-        table_data=rules.save_table.output.tab1,
-        fig_pdf=rules.save_figures.output.fig2
+        table_data=rules.save_table.output.tab1
     output:
         "../results/reports/report.html"
     params:
         pdf_fig1=config["playground_dir"] + "results/plots/figure_1.pdf"
     log:
-        "../results/logs/make_report.log"
+        mylog="../results/logs/make_report.log"
     script:
         "scripts/reports/report.Rmd"
+
+
+## This is an alternative way to knit the Rmd file. It achieves the same
+## result as the one above.
+#
+# rule my_report:
+#     input:
+#         R="scripts/reports/render.R",
+#         rmd="scripts/reports/my_report.Rmd"
+#     params:
+#         plots_dir=config["playground_dir"] + "results/plots/"
+#     output:
+#         html="scripts/reports/my_report.html"
+#     script:
+#         "scripts/reports/render.R"

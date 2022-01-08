@@ -6,7 +6,6 @@ sink(log, type="message")
 library("here")
 library("tidyverse")
 library("tidyr")
-library("rio")
 
 # load data
 # d <- readRDS(here::here("out", "data", "processed", "penguin_subset.rds"))
@@ -21,17 +20,3 @@ foo <- summary(fm)
 sink(snakemake@output[["tab1"]])
 print(summary(fm))
 sink()  # returns output to the console
-
-
-# dput(
-#   out_tab,
-#   file = snakemake@output[["tab1"]],
-#   control = "all"
-# )
-
-# To re-import the summary object:
-# res <- dget(
-#   here::here("out", "table","tab_1.txt")
-# )
-# res
-

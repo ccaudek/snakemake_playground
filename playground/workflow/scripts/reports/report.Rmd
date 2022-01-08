@@ -2,25 +2,44 @@
 title: "Test Report"
 author:
     - "Corrado Caudek"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time(), '%d %B %Y')`"
 params:
    rmd: "report.Rmd"
 output:
   html_document:
     highlight: tango
-  number_sections: no
-  theme: default
-  toc: yes
-  toc_depth: 3
-  toc_float:
-    collapsed: no
-    smooth_scroll: yes
+    number_sections: no
+    theme: default
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
 ---
 
 
 ```{r}
-library("tidyverse")
-library("knitr")
+suppressPackageStartupMessages({
+  library("tidyverse")
+  library("knitr")
+  library("rmarkdown")
+  library("here")
+})
+```
+
+```{r, echo = FALSE}
+opts_chunk$set(
+  tidy = FALSE,
+  cache = FALSE,
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+  # dpi = 100,
+  # fig.retina = 2,
+  # fig.align = "center",
+  # fig.width = 400/72,
+  # fig.height = 400/72
+  )
 ```
 
 ## A title
@@ -77,25 +96,23 @@ cat(readLines(foo), sep = '\n')
 
 ### First method
 
-I read the address of the file:
+The problem is that the pdf files of the figures are stored in the `results`,
+directory, which is one level up from the working directory specifyed by
+`here::here()`. The simplest solution is to pass the address of the image with
+`snakemake@params`:
 
-```{r}
-foo_fig <- snakemake@input[["fig_pdf"]]
-foo_fig
-```
-
-If I use the function `knitr::include_graphics()`, the workflow fails! There is a problem with the directory.
-
-```{r eval=FALSE}
-knitr::include_graphics(snakemake@input[["fig_pdf"]])
+```{r first-method, out.width = '80%'}
+knitr::include_graphics(snakemake@params[["pdf_fig1"]])
 ```
 
 ### Second method
 
-This method is not perfect, but at least it reads the image:
+If the file is in a subset folder from the working directory, it is possible to
+use `here::here()`. In this example, the file is located in the same folder as
+the rmd script being executed:
 
-```{r}
-knitr::include_graphics(snakemake@params[["pdf_fig1"]])
+```{r, second-method, out.width = '80%'}
+knitr::include_graphics(here::here("scripts", "reports", "figure_1.pdf"))
 ```
 
 
