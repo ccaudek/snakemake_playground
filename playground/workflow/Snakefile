@@ -10,13 +10,16 @@ min_version("6.12.3")
 from pathlib import Path
 import os
 
+print(f"Working directory: {os.getcwd()}")
 print(f"Current directory: {Path.cwd()}")
 print(f"Home directory: {Path.home()}")
-print(f"Working directory: {os.getcwd()}")
+path_wd = Path.cwd();
+print(f"Parent of working directory: {path_wd.parent}")
+# print("this one!!!!")
+print(path_wd.parent)
+# print(os.path.join(path_wd.parent, "results/plots/figure_1.pdf"))
 
-# external_module/Snakefile
 my_basedir = workflow.current_basedir
-
 
 configfile: "../config/config.yaml"
 
@@ -43,8 +46,13 @@ include: "rules/histogram.smk"
 
 # It is not possible to specify the address of the figures in `input:`, because
 # after a clean such figures do not exist. Instead, the address of the figures
-# that will be created *before* the make_report rule is executed can be
-# specified in `params:`.
+# that is created *before* the make_report rule is executed is specified in
+# `params:`. Because the `results` folder is one level up from the working
+# directory, the specification of the path is obtained with the method described
+# in the README.md file.
+# Another method is to specify the first part of the path (until `playground`)
+# in the config.yaml file, and then to add the second part of the path as
+# indicated in the commented line.
 
 rule make_report:
     input:
@@ -54,7 +62,8 @@ rule make_report:
     output:
         "../results/reports/report.html"
     params:
-        pdf_fig1=config["playground_dir"] + "results/plots/figure_1.pdf"
+        #pdf_fig1=config["playground_dir"] + "results/plots/figure_1.pdf"
+        pdf_fig1=os.path.join(path_wd.parent, "results/plots/figure_1.pdf")
     log:
         mylog="../results/logs/make_report.log"
     script:
