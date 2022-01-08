@@ -21,72 +21,75 @@ Install Snakemake using Mamba. For installation details, see this [link](https:/
 
 ## Snakefiles
 
-Snakemake work flows ("snakefiles") are python code (all the python syntax rules apply).
+Snakemake workflows ("snakefiles") are python code (all the python syntax rules apply).
 
 ### `input` section
 
 - Inputs are one or more file names, in quotes, comma-separated
 - Inputs are optional 
-- Inputs can have “symbolic” names
+- Inputs can have "symbolic" names
 
 ```snakemake
-rule align:
+rule make_report:
     input:
-      index="hg19", data="sample1.fastq"
+        data=config["raw_data"],
+        subset_data="../results/data/processed/penguin_subset.rds",
+        table_data=rules.save_table.output.tab1
     output:
-      "sample1.sam"
-    shell:
-      "bwa mem {input.index} {input.data} –o {output}”
-    message:
-      "Rule {rule} aligning input file {input.data}"
+        "../results/reports/report.html"
+    params:
+        pdf_fig1=config["playground_dir"] + "results/plots/figure_1.pdf"
+    log:
+        mylog="../results/logs/make_report.log"
+    script:
+        "scripts/reports/report.Rmd"
 ```
 
 ### `output` section
 
-- Same as inputs: one or more file names, in quotes, comma-separated
-- Same as inputs: can have ”symbolic names”
+- Outputs are one or more file names, in quotes, comma-separated
+- Outputs can have "symbolic names"
 - Outputs are optional
-- common in top-level rule that simply checks if inputs are present.
 
 ### `shell` directive
 
 The shell directive is followed by a Python string containing the shell command to execute.
 
-- This is where you encode the actual work of the work flow
-- By default: /bin/bash in strict mode (set –euo pipefail) 
+- This is where you encode the actual work of the workflow
+- By default: `/bin/bash` in strict mode (`set –euo pipefail`) 
 - Multi-line shell statements: use triple-quotes 
 - Can load modules, only affects the current rule.
 
 ```snakemake
 rule link:
-        input: "hello_world.o"
-        output: "hello_world"
-        shell:
-          """
-          module load gcc/6.1.0
-          gcc -o {output} {input} 
-          """
+  input: "hello_world.o"
+  output: "hello_world"
+  shell:
+    """
+    module load gcc/6.1.0
+    gcc -o {output} {input} 
+    """
 ```
 
 ### `run` directive
 
-- Instead of bash, the action can be written in python
-- Put this in the “run:” section of the rule
-- Note there are no quotes around the python code
+- Instead of bash, the action can be written in Python
+- Put this in the "run:" section of the rule
+- Note there are no quotes around the Python code
 
 ```snakemake
 rule usercount:
-    input: "userfile.txt"
-    output: "users.count"
-    run:
-        users=set() 
-        with open(input[0]) as infile:
-            ...
+  input: "userfile.txt"
+  output: "users.count"
+  run:
+    users=set() 
+      with open(input[0]) as infile:
+      ...
 ```
 
 ### `script` directive
 
-A rule can also point to an external script instead of a shell command or inline Python code. For this purpose, Snakemake offers the script directive. This mechanism also allows you to integrate R and R Markdown scripts with Snakemake, e.g.
+A rule can also point to an external script instead of a shell command or inline Python code. For this purpose, Snakemake offers the `script:` directive. This mechanism also allows you to integrate R and R Markdown scripts with Snakemake, e.g.
 
 ```snakemake
 rule NAME:
@@ -100,14 +103,16 @@ rule NAME:
         "scripts/script.R"
 ```
 
-Although there are other strategies to invoke separate scripts from your workflow (for example, invoking them via shell commands), the benefit of this is obvious: the script logic is separated from the workflow logic (and can even be shared between workflows), but boilerplate code like the **parsing of command line arguments is unnecessary**. It is best practice to use the script directive whenever an inline code block would have more than a few lines of code.
+Although there are other strategies to invoke separate scripts from your workflow (for example, invoking them via shell commands), the benefit of this is obvious: the script logic is separated from the workflow logic (and can even be shared between workflows), but boilerplate code like the **parsing of command line arguments is unnecessary**. It is best practice to use the `script` directive whenever an inline code block would have more than a few lines of code.
 
 The actual R code to generate the plot is hidden in the script scripts/script.R. Script paths are always relative to the referring Snakefile. In the script, all properties of the rule like input, output, wildcards, etc. are available as attributes of a global snakemake object.
 
-- When the rule is present in the Snakefile file, with the standardized directory structure the path for accessing an R script is `"scripts/script.R"`.
-- If the rule is moved into a `.smk` file in the `rules` folder, the path for accessing an R script is `"../scripts/script.R"`.
+With the standardized directory structure
 
-In R scripts, an S4 object named `snakemake` is available and allows access to input and output files and other parameters. Here, the syntax follows that of S4 classes with attributes that are R lists, for example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
+- if a rule is written in the Snakefile file, the path for accessing the R script is `"scripts/script.R"`.
+- if a rule is moved into a `.smk` file in the `rules` folder, the path for accessing the R script is `"../scripts/script.R"`.
+
+In R scripts, an S4 object named `snakemake` is available and allows access to input and output files and other parameters. The syntax follows that of S4 classes with attributes that are R lists. For example we can access the first input file with `snakemake@input[[1]]` (note that the first file does not have index 0 here, because R starts counting from 1). Named input and output files can be accessed in the same way, by just providing the name instead of an index, for example `snakemake@input[["myfile"]]`. An equivalent syntax is `snakemake@input$myfile`.
 
 A script written in R would look like this:
 
@@ -145,7 +150,7 @@ rule NAME:
         "path/to/report.Rmd"
 ```
 
-In the R Markdown file you can insert output from a R command, and access variables stored in the S4 object named snakemake
+In the R Markdown file you can insert output from a R command, and access variables stored in the S4 object named snakemake:
 
 ```markdown
 ---
@@ -178,12 +183,12 @@ Test include from snakemake `r snakemake@input`.
 ```
 
 
-- An R S4 object means that the syntax is something like this:
+- In an R S4 object, the syntax is:
 
 ```r
 # load data
-print("Loading phyloeq object")
-load(snakemake@input$phyloseq_file)
+print("Loading my_file object")
+load(snakemake@input$my_file)
 ```
 
 ## Wildcards
