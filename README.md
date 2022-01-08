@@ -13,21 +13,11 @@ Corrado Caudek <a href="https://orcid.org/0000-0002-1404-0420">
 
 ## Introduction
 
-A Snakemake workflow is defined by specifying rules in a Snakefile. Rules decompose the workflow into small steps (for example, the application of a single tool) by specifying how to create sets of output files from sets of input files. Snakemake automatically determines the dependencies between the rules by matching file names. The workflow is determined automatically from top (the files you want) to bottom (the files you have), by applying very general rules with wildcards you give to Snakemake.
+A Snakemake workflow is defined by specifying rules in a Snakefile (or in external `.smk` files). Rules decompose the workflow into small steps by specifying how to create sets of output files from sets of input files. Snakemake automatically determines the dependencies between the rules by matching file names. The workflow is determined automatically from top (the files you want) to bottom (the files you have), by applying very general rules with wildcards you give to Snakemake.
 
 ## Install Snakemake
 
-Install Snakemake using Mamba. For installation details, see the [link](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
-
-```sh
-# To activate this environment, use
-conda info --envs
-conda activate snakemake
-snakemake --help
-
-# To deactivate an active environment, use
-conda deactivate
-```
+Install Snakemake using Mamba. For installation details, see this [link](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
 ## Snakefiles
 
@@ -302,6 +292,22 @@ snakemake --cores 4 --report
 ```
 
 With the present directory structure, the output will be saved in the workflow folder.
+
+### Environment
+
+It is possible to "freeze" an environment, with packages in R and python, and then to activate such environment.
+
+```sh
+# To activate this environment, use
+conda info --envs
+conda activate snakemake
+snakemake --help
+
+# To deactivate an active environment, use
+conda deactivate
+```
+
+TODO: describe how to create the environment.
 
 ## Protected and Temporary Files
 
