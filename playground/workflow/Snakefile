@@ -10,13 +10,12 @@ min_version("6.12.3")
 from pathlib import Path
 import os
 
-print(f"Working directory: {os.getcwd()}")
+# print(f"Working directory: {os.getcwd()}")
 print(f"Current directory: {Path.cwd()}")
 print(f"Home directory: {Path.home()}")
 path_wd = Path.cwd();
 print(f"Parent of working directory: {path_wd.parent}")
-# print("this one!!!!")
-print(path_wd.parent)
+# print(path_wd.parent)
 # print(os.path.join(path_wd.parent, "results/plots/figure_1.pdf"))
 
 my_basedir = workflow.current_basedir
@@ -32,13 +31,16 @@ rule targets:
         "../results/data/processed/penguin_subset.rds",
         "../results/tables/tab_1.txt",
         "../results/plots/hist_1.pdf",
-        "../results/reports/report.html"
+        "../results/reports/report.html",
+        "../results/brms/fit_01.rds",
+        "../results/brms/table_1.csv"
         #"scripts/reports/my_report.html"
 
 
 include: "rules/common.smk"
 include: "rules/eda.smk"
 include: "rules/histogram.smk"
+include: "rules/brm_fit_model.smk"
 
 
 # Because of the directory structure, it is simpler to put the make_report

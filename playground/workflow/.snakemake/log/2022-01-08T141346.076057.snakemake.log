@@ -10,13 +10,13 @@ total        1              1              1
 
 Select jobs to execute...
 
-[Sat Jan  8 13:41:16 2022]
+[Sat Jan  8 14:13:46 2022]
 rule clean:
     log: ../results/logs/clean.log
     jobid: 0
     resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
 
-[Sat Jan  8 13:41:16 2022]
+[Sat Jan  8 14:13:46 2022]
 Finished job 0.
 1 of 1 steps (100%) done
-Complete log: /Users/corrado/_repositories/snakemake_playground/playground/workflow/.snakemake/log/2022-01-08T134115.525135.snakemake.log
+Complete log: /Users/corrado/Documents/snakemake_workflows/snakemake_playground/playground/workflow/.snakemake/log/2022-01-08T141346.076057.snakemake.log

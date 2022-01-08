@@ -5,16 +5,17 @@ Rules claiming more threads will be scaled down.
 Job stats:
 job               count    min threads    max threads
 --------------  -------  -------------  -------------
+fit_model             1              1              1
 make_histogram        1              1              1
 make_report           1              1              1
 save_figures          1              1              1
 save_table            1              1              1
 targets               1              1              1
-total                 5              1              1
+total                 6              1              1
 
 Select jobs to execute...
 
-[Sat Jan  8 13:41:24 2022]
+[Sat Jan  8 15:45:19 2022]
 rule make_histogram:
     input: scripts/data/penguins.csv
     output: ../results/plots/hist_1.pdf
@@ -22,7 +23,7 @@ rule make_histogram:
     jobid: 3
     resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
 
-[Sat Jan  8 13:41:24 2022]
+[Sat Jan  8 15:45:19 2022]
 rule save_figures:
     input: scripts/data/penguins.csv
     output: ../results/plots/figure_1.pdf, ../results/plots/figure_2.pdf, ../results/data/processed/penguin_subset.rds
@@ -30,15 +31,23 @@ rule save_figures:
     jobid: 1
     resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
 
-[Sat Jan  8 13:41:26 2022]
+[Sat Jan  8 15:45:21 2022]
 Finished job 3.
-1 of 5 steps (20%) done
-[Sat Jan  8 13:41:26 2022]
+1 of 6 steps (17%) done
+[Sat Jan  8 15:45:21 2022]
 Finished job 1.
-2 of 5 steps (40%) done
+2 of 6 steps (33%) done
 Select jobs to execute...
 
-[Sat Jan  8 13:41:26 2022]
+[Sat Jan  8 15:45:21 2022]
+rule fit_model:
+    input: ../results/data/processed/penguin_subset.rds
+    output: ../results/brms/fit_01.rds
+    log: ../results/logs/fit_model.log
+    jobid: 5
+    resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
+
+[Sat Jan  8 15:45:21 2022]
 rule save_table:
     input: ../results/data/processed/penguin_subset.rds
     output: ../results/tables/tab_1.txt
@@ -46,12 +55,12 @@ rule save_table:
     jobid: 2
     resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
 
-[Sat Jan  8 13:41:27 2022]
+[Sat Jan  8 15:45:23 2022]
 Finished job 2.
-3 of 5 steps (60%) done
+3 of 6 steps (50%) done
 Select jobs to execute...
 
-[Sat Jan  8 13:41:27 2022]
+[Sat Jan  8 15:45:23 2022]
 rule make_report:
     input: scripts/data/penguins.csv, ../results/data/processed/penguin_subset.rds, ../results/tables/tab_1.txt
     output: ../results/reports/report.html
@@ -59,18 +68,21 @@ rule make_report:
     jobid: 4
     resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
 
-[Sat Jan  8 13:41:30 2022]
+[Sat Jan  8 15:45:27 2022]
 Finished job 4.
-4 of 5 steps (80%) done
+4 of 6 steps (67%) done
+[Sat Jan  8 15:45:38 2022]
+Finished job 5.
+5 of 6 steps (83%) done
 Select jobs to execute...
 
-[Sat Jan  8 13:41:30 2022]
+[Sat Jan  8 15:45:38 2022]
 localrule targets:
-    input: ../results/plots/figure_1.pdf, ../results/plots/figure_2.pdf, ../results/data/processed/penguin_subset.rds, ../results/tables/tab_1.txt, ../results/plots/hist_1.pdf, ../results/reports/report.html
+    input: ../results/plots/figure_1.pdf, ../results/plots/figure_2.pdf, ../results/data/processed/penguin_subset.rds, ../results/tables/tab_1.txt, ../results/plots/hist_1.pdf, ../results/reports/report.html, ../results/brms/fit_01.rds
     jobid: 0
     resources: tmpdir=/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T
 
-[Sat Jan  8 13:41:30 2022]
+[Sat Jan  8 15:45:38 2022]
 Finished job 0.
-5 of 5 steps (100%) done
-Complete log: /Users/corrado/_repositories/snakemake_playground/playground/workflow/.snakemake/log/2022-01-08T134123.867718.snakemake.log
+6 of 6 steps (100%) done
+Complete log: /Users/corrado/Documents/snakemake_workflows/snakemake_playground/playground/workflow/.snakemake/log/2022-01-08T154519.057210.snakemake.log

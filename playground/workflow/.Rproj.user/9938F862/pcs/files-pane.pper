@@ -1,0 +1,9 @@
+{
+    "sortOrder": [
+        {
+            "columnIndex": 2,
+            "ascending": true
+        }
+    ],
+    "path": "~/Documents/snakemake_workflows/snakemake_playground/playground/workflow/scripts/analysis"
+}
