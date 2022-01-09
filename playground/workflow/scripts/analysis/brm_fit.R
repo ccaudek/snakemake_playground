@@ -22,7 +22,6 @@ suppressPackageStartupMessages({
   library("patchwork")
 })
 
-
 d <- readRDS(snakemake@input[["brm_data"]])
 
 f_ref <- bf(
