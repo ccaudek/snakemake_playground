@@ -27,7 +27,7 @@ report: "report/workflow.rst"
 rule targets:
     input:
         "../results/plots/figure_1.pdf",
-        "../results/plots/figure_2.pdf",
+        "../results/plots/figure_2.png",
         "../results/data/processed/penguin_subset.rds",
         "../results/tables/tab_1.txt",
         "../results/plots/hist_1.pdf",
@@ -36,12 +36,10 @@ rule targets:
         "../results/brms/table_1.csv"
         #"scripts/reports/my_report.html"
 
-
 include: "rules/common.smk"
 include: "rules/eda.smk"
 include: "rules/histogram.smk"
 include: "rules/brm_fit_model.smk"
-
 
 # Because of the directory structure, it is simpler to put the make_report
 # rule in the Snakefile.

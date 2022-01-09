@@ -13,8 +13,10 @@ rule save_figures:
     input:
         penguins_data=config["raw_data"]
     output:
-        fig1="../results/plots/figure_1.pdf",
-        fig2="../results/plots/figure_2.pdf",
+        fig1=report("../results/plots/figure_1.pdf",
+            caption="../report/figure_1.rst", category="Step 1"),
+        fig2=report("../results/plots/figure_2.png",
+            caption="../report/figure_2.rst", category="Step 1"),
         data_subset="../results/data/processed/penguin_subset.rds"
     params:
         title_label=["This is a fantastic title"],
